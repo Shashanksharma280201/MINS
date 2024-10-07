@@ -1,0 +1,71 @@
+%YAML:1.0 # need to specify the file type at the top!
+
+# Camera configuration file for ROS2
+
+cam:
+  enabled: false
+  max_n: 2
+  use_stereo: true
+  stereo_pair: [0, 1]
+  do_calib_ext: true      # Enable external calibration
+  do_calib_int: true      # Enable internal calibration
+  do_calib_dt: true       # Enable dynamic calibration
+  n_pts: 300              # Increased number of points for detection
+  fast: 10                 # Adjusted FAST threshold
+  grid_x: 30              # Increased grid size
+  grid_y: 30              # Increased grid size
+  min_px_dist: 10         # Reduced minimum pixel distance for features
+  knn: 0.75                # Slightly increased KNN threshold
+  downsample: false        # Ensure we capture all details
+  histogram_method: "CLAHE" # Changed method for better contrast adjustment
+  max_slam: 100           # Increased max SLAM features
+  max_msckf: 30           # Increased max MSCKF features
+  feat_rep: "GLOBAL_3D"   # Retained, but evaluate alternatives if needed
+  init_cov_dt: 1e-4
+  init_cov_ex_o: 1e-4
+  init_cov_ex_p: 1e-3
+  init_cov_in_k: 1e-2     # Increased confidence in intrinsic parameters
+  init_cov_in_c: 1e-2     # Increased confidence in intrinsic parameters
+  init_cov_in_r: 1e-4     # Increased confidence in rotation parameters
+  sigma_px: 1
+  chi2_mult: 0.5          # Lowering to make system more conservative
+
+# Camera 0 configuration
+cam0:
+  timeoffset: 0.0
+  T_cam_imu:
+    - [-0.007761805563794688, -0.9998617724361787, 0.014703414405289425, 0.058313580358164245]
+    - [0.99994829052482, -0.007664185230985332, 0.0066840512592031154, 0.010828818671678841]
+    - [-0.006570437647551022, 0.014754534405699541, 0.999869558024241, -0.03876433006930458]
+    - [0.0, 0.0, 0.0, 1.0]
+  cam_overlaps: [1]
+  camera_model: pinhole
+  distortion_coeffs: [0.05232113593699716, -0.12487610292253656, -0.0037217013110222687, -0.005694290501133073]
+  distortion_model: radtan
+  intrinsics: [806.0983330751723, 806.9371188046457, 644.0717375173197, 372.1150158131226]
+  resolution: [1280, 720]
+  timeshift_cam_imu: 0.012250562026137328
+  topic: "/left/image_rect"
+  
+# Camera 1 configuration
+cam1:
+  timeoffset: 0.0
+  T_cam_imu:
+    - [-0.0074757030811907765, -0.9998459022778627, 0.015883499665008856, -0.01694883585889153]
+    - [0.9999426404990135, -0.00735270612853528, 0.007788030845354505, 0.010720257947184378]
+    - [-0.007670044022211801, 0.015940809601581174, 0.9998435182637049, -0.03798220632736266]
+    - [0.0, 0.0, 0.0, 1.0]
+  T_cn_cnm1:
+    - [0.9999992626461442, 0.0002938538069278563, 0.0011782856653407272, -0.07521987985445643]
+    - [-0.0002951599237007626, 0.9999993420889602, 0.0011084684331490013, -4.83727319518795e-05]
+    - [-0.001177959162464639, -0.001108815398522607, 0.9999986914694563, 0.0008627711948019802]
+    - [0.0, 0.0, 0.0, 1.0]
+  cam_overlaps: [0]
+  camera_model: pinhole
+  distortion_coeffs: [0.06051458644906313, -0.1573827673651607, -0.0042069861440766415, -0.004175998024057702]
+  distortion_model: radtan
+  intrinsics: [805.9461502073949, 807.3027995524748, 642.7647267239337, 370.57625497718556]
+  resolution: [1280, 720]
+  timeshift_cam_imu: 0.012243445455696016
+  topic: "/right/image_rect"
+
