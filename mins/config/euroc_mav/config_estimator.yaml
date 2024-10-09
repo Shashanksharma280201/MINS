@@ -1,19 +1,21 @@
 %YAML:1.0 # need to specify the file type at the top!
 
+#config_estimator.yaml
+
 est:
   gravity_mag: 9.805
   clone_freq: 20        # match it with the camera freq
-  window_size: 1.5        # Increased window size for better historical context
-  intr_order: 3
+  window_size: 1.0        # Increased window size for better historical context
+  intr_order: 1
   intr_error_mlt: 1.00
-  intr_error_ori_thr: 0.005 # Reduced threshold for orientation error
-  intr_error_pos_thr: 0.002 # Reduced threshold for position error
+  intr_error_ori_thr: 0.5 # Reduced threshold for orientation error
+  intr_error_pos_thr: 0.5 # Reduced threshold for position error
   intr_error_thr_mlt: 1.0
   dt_extrapolation: 0.015   # Adjusted extrapolation time
 
   use_imu_res: true
-  use_imu_cov: false         # Enabled IMU covariance for better reliability
-  use_pol_cov: true
+  use_imu_cov: true         # Enabled IMU covariance for better reliability
+  use_pol_cov: false
   dynamic_cloning: true      # Enable dynamic cloning for better adaptability
 
 # Slope of the polynomial pose interpolation error based on acceleration

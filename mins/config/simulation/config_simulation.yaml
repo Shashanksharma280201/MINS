@@ -3,10 +3,10 @@
 sim:
   seed: 0
   do_perturb: true
-  remove_noise: true
-  BSpline_path: "/home/flo/vio/MINS-ros2/src/mins_data/BSplineDataset/UD_Spencer.txt"
-  planes_path: "/home/flo/vio/MINS-ros2/src/mins_data/FloorPlans/UD_Spencer.txt"
-  const_holonomic: true
+  remove_noise: false
+  BSpline_path: "/home/fl/vio/MINS-ros2/src/mins_data/BSplineDataset/UD_Spencer.txt"
+  planes_path: "/home/fl/vio/MINS-ros2/src/mins_data/FloorPlans/UD_Spencer.txt"
+  const_holonomic: false
   const_planar: false
   freq_imu: 200.0
   freq_cam: 30.0
@@ -15,15 +15,15 @@ sim:
   freq_vicon: 20.0
   freq_lidar: 10.0
   distance_threshold: 1
-  min_feature_gen_dist: 5
-  max_feature_gen_dist: 7
+  min_feature_gen_dist: 2
+  max_feature_gen_dist: 5
 #  T_WtoE:
 #    - [0.0,-1.0, 0.0, 0.0]
 #    - [1.0, 0.0, 0.0, 0.0]
 #    - [0.0, 0.0, 1.0, 0.0]
 #    - [0.0, 0.0, 0.0, 1.0]
   T_WtoE:
-    - [1.0, 0.0, 0.0, 0.0]
-    - [0.0, 1.0, 0.0, 0.0]
+    - [0.086, -0.5, 0.0, 0.5]
+    - [0.5, 0.086, 0.0, 0.2]
     - [0.0, 0.0, 1.0, 0.0]
     - [0.0, 0.0, 0.0, 1.0]

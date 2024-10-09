@@ -1,0 +1,157 @@
+%YAML:1.0 # Configuration file for camera and IMU settings
+
+# config_camera.yaml
+
+cam:
+  enabled: true
+  max_n: 2
+  use_stereo: true
+  stereo_pair: [0, 1]
+  do_calib_ext: true      # Enable external calibration
+  do_calib_int: true      # Enable internal calibration
+  do_calib_dt: true       # Enable dynamic calibration
+  n_pts: 300              # Increased number of points for detection
+  fast: 2                 # Adjusted FAST threshold
+  grid_x: 40              # Increased grid size
+  grid_y: 40              # Increased grid size
+  min_px_dist: 5          # Reduced minimum pixel distance for features
+  knn: 0.80               # Slightly increased KNN threshold
+  downsample: true        # Ensure we capture all details
+  histogram_method: "CLAHE" # Changed method for better contrast adjustment
+  max_slam: 200           # Increased max SLAM features
+  max_msckf: 50           # Increased max MSCKF features
+  feat_rep: "GLOBAL_3D"   # Retained, but evaluate alternatives if needed
+  init_cov_dt: 1e-4
+  init_cov_ex_o: 1e-4
+  init_cov_ex_p: 1e-1
+  init_cov_in_k: 1e-2     # Increased confidence in intrinsic parameters
+  init_cov_in_c: 1e-2     # Increased confidence in intrinsic parameters
+  init_cov_in_r: 1e-2     # Increased confidence in rotation parameters
+  sigma_px: 1.5
+  chi2_mult: 0.5          # Lowering to make system more conservative
+
+# Camera 0 configuration
+cam0:
+  timeoffset: 0.0
+  T_imu_cam:
+    - [-0.007761805563794688, -0.9998617724361787, 0.014703414405289425, 0.058313580358164245]
+    - [0.99994829052482, -0.007664185230985332, 0.0066840512592031154, 0.010828818671678841]
+    - [-0.006570437647551022, 0.014754534405699541, 0.999869558024241, -0.03876433006930458]
+    - [0.0, 0.0, 0.0, 1.0]
+  cam_overlaps: [1]
+  camera_model: pinhole
+  distortion_coeffs: [0.05232113593699716, -0.12487610292253656, -0.0037217013110222687, -0.005694290501133073]
+  distortion_model: radtan
+  intrinsics: [806.0983330751723, 806.9371188046457, 644.0717375173197, 372.1150158131226]
+  resolution: [1280, 720]
+  timeshift_cam_imu: 0.012250562026137328
+  topic: "/oakd/left_stereo/image_rect"
+  rate: 30  # Set to 30 Hz
+
+# Camera 1 configuration
+cam1:
+  timeoffset: 0.0
+  T_imu_cam:
+    - [-0.0074757030811907765, -0.9998459022778627, 0.015883499665008856, -0.01694883585889153]
+    - [0.9999426404990135, -0.00735270612853528, 0.007788030845354505, 0.010720257947184378]
+    - [-0.007670044022211801, 0.015940809601581174, 0.9998435182637049, -0.03798220632736266]
+    - [0.0, 0.0, 0.0, 1.0]
+  T_cn_cnm1:
+    - [0.9999992626461442, 0.0002938538069278563, 0.0011782856653407272, -0.07521987985445643]
+    - [-0.0002951599237007626, 0.9999993420889602, 0.0011084684331490013, -4.83727319518795e-05]
+    - [-0.001177959162464639, -0.001108815398522607, 0.9999986914694563, 0.0008627711948019802]
+    - [0.0, 0.0, 0.0, 1.0]
+  cam_overlaps: [0]
+  camera_model: pinhole
+  distortion_coeffs: [0.06051458644906313, -0.1573827673651607, -0.0042069861440766415, -0.004175998024057702]
+  distortion_model: radtan
+  intrinsics: [805.9461502073949, 807.3027995524748, 642.7647267239337, 370.57625497718556]
+  resolution: [1280, 720]
+  timeshift_cam_imu: 0.012243445455696016
+  topic: "/oakd/right_stereo/image_rect"
+  rate: 30  # Set to 30 Hz
+
+
+# config_system.yaml
+
+sys:
+  verbosity: 2
+  save_timing: true
+  save_state: true
+  path_timing: "MINS_DIR/../../../../outputs/tmp/0.time"
+  save_trajectory: false
+  path_trajectory: "MINS_DIR/../../../../outputs/tmp/0.txt"
+  save_prints: false
+  exp_id: 0
+  path_bag: "/home/fl/vio/mybag"
+  bag_start: 0
+  bag_durr: -1
+  bag_buffer_size: 1000  # Increased buffer size for bag files
+
+
+# config_init.yaml
+
+init:
+  window_time: 2.0 # how many seconds to collect initialization information
+  imu_thresh: 0.5 # threshold for variance of the accelerometer to detect a "jerk" in motion
+  imu_wheel_thresh: 0.05
+  imu_only_init: true
+  imu_gravity_aligned: true
+  use_gt: false
+  use_gt_gnss: false
+  use_gt_lidar: false
+  cov_size: 1e-4
+
+
+# config_imu.yaml
+
+imu:
+  accel_noise: 0.00975251162
+  accel_bias: 0.0021280256
+  gyro_noise: 0.00135568192
+  gyro_bias: 7.111367e-05
+  topic: "/imu"
+  rate: 200  # Set to 30 Hz
+
+
+# config_estimator.yaml
+
+est:
+  gravity_mag: 9.805
+  clone_freq: 30        # Match it with the camera and IMU frequency
+  window_size: 3.0      # Increased window size for better historical context
+  intr_order: 3
+  intr_error_mlt: 1.00
+  intr_error_ori_thr: 0.005 # Reduced threshold for orientation error
+  intr_error_pos_thr: 0.002 # Reduced threshold for position error
+  intr_error_thr_mlt: 1.0
+  dt_extrapolation: 0.015   # Adjusted extrapolation time
+  use_imu_res: true
+  use_imu_cov: true         # Enabled IMU covariance for better reliability
+  use_pol_cov: false
+  dynamic_cloning: true      # Enable dynamic cloning for better adaptability
+
+# Slope of the polynomial pose interpolation error based on acceleration
+# order: 1 3 5 7 9
+intr_ori:
+  Hz_4: [0.05040, 0.03465, 0.03303, 0.03510, 0.04842]
+  Hz_5: [0.03060, 0.01953, 0.01800, 0.01791, 0.02016]
+  Hz_6: [0.02349, 0.01359, 0.01224, 0.01179, 0.01224]
+  Hz_7: [0.01800, 0.00954, 0.00837, 0.00801, 0.00801]
+  Hz_9: [0.00464, 0.00220, 0.00188, 0.00184, 0.00184]
+  Hz_10: [0.00288, 0.00126, 0.00108, 0.00102, 0.00102]
+  Hz_15: [0.00138, 0.00066, 0.00063, 0.00069, 0.00087]
+  Hz_20: [0.00084, 0.00012, 0.00006, 0.00003, 0.00003]
+  Hz_25: [0.00051, 0.00012, 0.00009, 0.00009, 0.00009]
+  Hz_30: [0.00036, 0.00006, 0.00003, 0.00003, 0.00003]
+intr_pos:
+  Hz_4: [0.05463, 0.02493, 0.02160, 0.02079, 0.02124]
+  Hz_5: [0.03501, 0.01422, 0.01197, 0.01125, 0.01098]
+  Hz_6: [0.02538, 0.00936, 0.00792, 0.00765, 0.00765]
+  Hz_7: [0.01899, 0.00648, 0.00549, 0.00531, 0.00531]
+  Hz_9: [0.00524, 0.00100, 0.00088, 0.00084, 0.00084]
+  Hz_10: [0.00312, 0.00087, 0.00072, 0.00066, 0.00066]
+  Hz_15: [0.00144, 0.00021, 0.00018, 0.00015, 0.00015]
+  Hz_20: [0.00084, 0.00009, 0.00006, 0.00003, 0.00003]
+  Hz_25: [0.00054, 0.00006, 0.00003, 0.00003, 0.00003]
+  Hz_30: [0.00036, 0.00003, 0.00003, 0.00003, 0.00000]

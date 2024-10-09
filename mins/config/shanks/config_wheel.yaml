@@ -1,0 +1,27 @@
+%YAML:1.0 # need to specify the file type at the top!
+
+wheel:
+  enabled: false
+  type: "Wheel3DCen" # Choose the appropriate type based on your setup
+  do_calib_dt: false          # Enable if you want to calibrate the time offset
+  do_calib_ext: true          # Recommended if external calibration is needed
+  do_calib_int: false         # Set to true if you want to calibrate internal parameters
+  noise_w: 0.01               # Reduce noise if the sensor is stable (try values between 0.01 and 0.1)
+  noise_v: 0.01               # Similar to noise_w, reduce for stability (0.01 is a good starting point)
+  noise_p: 0.005              # Lower this for more accurate position estimates
+  init_cov_dt: 1e-6           # Decrease for more confidence in initial delta time
+  init_cov_ex_o: 1e-6         # Decrease for more confidence in initial external orientation
+  init_cov_ex_p: 1e-4         # Adjust based on how precise you need external position
+  init_cov_in_b: 1e-4         # Initial covariance for the internal bias, can be 1e-4
+  init_cov_in_r: 1e-4         # Similar to init_cov_in_b, can also be set to 1e-4
+  chi2_mult: 1                # Keep as 1 unless you have a specific reason to adjust it
+  timeoffset: 0.0             # Set based on calibration data
+  intrinsics: [0.0, 0.0, 0.0] # Typically set to zero; adjust based on calibration results
+  reuse_of_information: true    # Useful for leveraging past measurements
+  T_imu_wheel:
+    - [1.0, 0.0, 0.0, 0.07]    # Adjust if you have specific measurements for the transformation
+    - [0.0, 1.0, 0.0, 0.0]
+    - [0.0, 0.0, 1.0, -1.7]
+    - [0.0, 0.0, 0.0, 1.0]
+  topic: "/joints/states"
+

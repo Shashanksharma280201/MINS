@@ -4,13 +4,13 @@ sys:
   verbosity: 2
   save_timing: true
   path_timing: "MINS_DIR/../../../../outputs/tmp/0.time"
-  save_state: false
+  save_state: true
   path_state: "MINS_DIR/../../../../outputs/tmp/0/"
   save_trajectory: true
   path_trajectory: "MINS_DIR/../../../../outputs/tmp/0.txt"
   save_prints: false
   exp_id: 0
 
-  path_bag: "/home/wsl/Downloads/dataset-room1_512_16.bag"
+  path_bag: "/home/wsl/Downloads/urban28.bag"
   bag_start: 0
   bag_durr: -1
