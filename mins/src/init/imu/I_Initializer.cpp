@@ -26,8 +26,9 @@
  */
 
 #include "I_Initializer.h"
+
 #include "options/OptionsEstimator.h"
-#include "options/OptionsInit.h"  
+#include "options/OptionsInit.h"
 #include "state/Propagator.h"
 #include "utils/Print_Logger.h"
 #include "utils/colors.h"
@@ -41,10 +42,8 @@ using namespace ov_core;
 
 bool I_Initializer::initialization(Matrix<double, 17, 1> &imustate) {
 
-  // Return if we don't have any measurements        
-
-  // changed the number of imu initializations form 2 to 1
-  if (imu_pp->imu_data.size() < 1) {
+  // Return if we don't have any measurements
+  if (imu_pp->imu_data.size() < 2) {
     return false;
   }
 

@@ -1,6 +1,6 @@
 <launch>
     <!--EUROC_MH1, EUROC_V11, TUM_C, TUM_R1, UD_Gore, UD_Small, UD_Spencer, UD_Warehouse-->
-    <arg name="dataset"                     default="rosbag" />
+    <arg name="dataset"                     default="UD_Warehouse" />
     <arg name="config_path"                 default="$(find mins)/config/simulation/config.yaml" />
     <!--Sim-->
     <arg name="sim_BSpline_path"            default="$(find mins_data)/BSplineDataset/$(arg dataset).txt" />
@@ -21,12 +21,12 @@
     <arg name="sim_freq_lidar"              default="10" />
     <!--Sys-->
     <arg name="sys_verbosity"               default="2" /> <!-- ALL(0), DEBUG(1), INFO(2), WARNING(3), ERROR(4) -->
-    <arg name="sys_exp_id"                  default="rosbag_run" />
-    <arg name="sys_save_state"              default="false" />
+    <arg name="sys_exp_id"                  default="$(arg sim_seed)" />
+    <arg name="sys_save_state"              default="true" />
     <arg name="sys_path_state"              default="$(find mins)/../../../../outputs/tmp/$(arg sim_seed)/" />
-    <arg name="sys_save_timing"             default="false" />
+    <arg name="sys_save_timing"             default="true" />
     <arg name="sys_path_timing"             default="$(arg sys_path_state)/../$(arg sim_seed).time" />
-    <arg name="sys_save_trajectory"         default="false" />
+    <arg name="sys_save_trajectory"         default="true" />
     <arg name="sys_path_trajectory"         default="$(arg sys_path_state)/../$(arg sim_seed).txt" />
     <!--Est-->
     <arg name="est_clone_freq"              default="20" />
@@ -76,7 +76,7 @@
     <arg name="wheel_init_cov_in_b"         default="1e-4" /> <!-- prior -->
     <arg name="wheel_init_cov_in_r"         default="1e-4" /> <!-- prior -->
     <!--LiDAR-->
-    <arg name="lidar_enabled"               default="false" />
+    <arg name="lidar_enabled"               default="true" />
     <arg name="lidar_max_n"                 default="1" />
     <arg name="lidar_raw_downsample_size"   default="0.3" />
     <arg name="lidar_map_downsample_size"   default="0.3" />

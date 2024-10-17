@@ -5,72 +5,53 @@ cam:
   max_n: 2
   use_stereo: true
   stereo_pair: [0, 1]
-  do_calib_ext: true
-  do_calib_int: true
-  do_calib_dt: true
-  n_pts: 3000
-  fast: 30
-  grid_x: 15
-  grid_y: 15
+  do_calib_ext: false
+  do_calib_int: false
+  do_calib_dt: false
+  n_pts: 200
+  fast: 20
+  grid_x: 20
+  grid_y: 20
   min_px_dist: 15
-  knn: 0.65
-  downsample: true
+  knn: 0.70
+  downsample: false
   histogram_method: "HISTOGRAM" # NONE, HISTOGRAM, CLAHE
-  max_slam: 0
+  max_slam: 50
   max_msckf: 50
-  feat_rep: "GLOBAL_FULL_INVERSE_DEPTH"
+  feat_rep: "GLOBAL_3D"
   init_cov_dt: 1e-4
   init_cov_ex_o: 1e-4
   init_cov_ex_p: 1e-4
-  init_cov_in_k: 1e-2
+  init_cov_in_k: 1e-1
   init_cov_in_c: 1e-1
-  init_cov_in_r: 1e-6
-  sigma_px: 2
+  init_cov_in_r: 1e-5
+  sigma_px: 1
   chi2_mult: 1
-
-  # feature related
-  fi_min_dist: 0.25
-  fi_max_dist: 150
-  fi_max_baseline: 2000
-  fi_max_cond_number: 10000
 
   # ==================================================================
   # ==================================================================
 
 cam0:
-  timeoffset: 0.0167
-  T_imu_cam:
-    - [-0.007761805563794688, -0.9998617724361787, 0.014703414405289425, 0.058313580358164245]
-    - [0.99994829052482, -0.007664185230985332, 0.0066840512592031154, 0.010828818671678841]
-    - [-0.006570437647551022, 0.014754534405699541, 0.999869558024241, -0.03876433006930458]
+  timeoffset: 0.0
+  T_imu_cam: #rotation from camera to IMU, position of camera in IMU
+    - [0.0148655429818, -0.999880929698, 0.00414029679422, -0.0216401454975]
+    - [0.999557249008, 0.0149672133247, 0.025715529948, -0.064676986768]
+    - [-0.0257744366974, 0.00375618835797, 0.999660727178, 0.00981073058949]
     - [0.0, 0.0, 0.0, 1.0]
-  cam_overlaps: [1]
-  camera_model: pinhole
-  distortion_coeffs: [0.05232113593699716, -0.12487610292253656, -0.0037217013110222687, -0.005694290501133073]
+  intrinsics: [458.654, 457.296, 367.215, 248.375] #fu, fv, cu, cv
+  distortion_coeffs: [-0.28340811, 0.07395907, 0.00019359, 1.76187114e-05]
   distortion_model: radtan
-  intrinsics: [806.0983330751723, 806.9371188046457, 644.0717375173197, 372.1150158131226]
-  resolution: [1280, 720]
-  timeshift_cam_imu: 0.012250562026137328
-  topic: "/oakd/left_stereo/image_rect"
-  
-# Camera 1 configuration
+  resolution: [752, 480]
+  topic: "/cam0/image_raw"
 cam1:
-  timeoffset: 0.0167
-  T_imu_cam:
-    - [-0.0074757030811907765, -0.9998459022778627, 0.015883499665008856, -0.01694883585889153]
-    - [0.9999426404990135, -0.00735270612853528, 0.007788030845354505, 0.010720257947184378]
-    - [-0.007670044022211801, 0.015940809601581174, 0.9998435182637049, -0.03798220632736266]
+  timeoffset: 0.0
+  T_imu_cam: #rotation from camera to IMU, position of camera in IMU
+    - [0.0125552670891, -0.999755099723, 0.0182237714554, -0.0198435579556]
+    - [0.999598781151, 0.0130119051815, 0.0251588363115, 0.0453689425024]
+    - [-0.0253898008918, 0.0179005838253, 0.999517347078, 0.00786212447038]
     - [0.0, 0.0, 0.0, 1.0]
-  T_cn_cnm1:
-    - [0.9999992626461442, 0.0002938538069278563, 0.0011782856653407272, -0.07521987985445643]
-    - [-0.0002951599237007626, 0.9999993420889602, 0.0011084684331490013, -4.83727319518795e-05]
-    - [-0.001177959162464639, -0.001108815398522607, 0.9999986914694563, 0.0008627711948019802]
-    - [0.0, 0.0, 0.0, 1.0]
-  cam_overlaps: [0]
-  camera_model: pinhole
-  distortion_coeffs: [0.06051458644906313, -0.1573827673651607, -0.0042069861440766415, -0.004175998024057702]
+  distortion_coeffs: [-0.28368365,0.07451284,-0.00010473,-3.55590700e-05]
   distortion_model: radtan
-  intrinsics: [805.9461502073949, 807.3027995524748, 642.7647267239337, 370.57625497718556]
-  resolution: [1280, 720]
-  timeshift_cam_imu: 0.012243445455696016
-  topic: "/oakd/right_stereo/image_rect"
+  intrinsics: [457.587, 456.134, 379.999, 255.238] #fu, fv, cu, cv
+  resolution: [752, 480]
+  topic: "/cam1/image_raw"

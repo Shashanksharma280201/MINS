@@ -2,7 +2,7 @@
 
 est:
   gravity_mag: 9.81
-  clone_freq: 15
+  clone_freq: 20
   window_size: 1.0
   intr_order: 3
   intr_error_mlt: 3

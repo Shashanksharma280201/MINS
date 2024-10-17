@@ -115,7 +115,7 @@ void UpdaterCamera::feed_measurement(const ov_core::CameraData &camdata) {
 
   // record timestamps
   for (auto cam_id : camdata.sensor_ids) {
-    t_hist.at(cam_id).size() > 100 ? t_hist.at(cam_id).pop_front() : void(); // remove if we have too many
+    t_hist.at(cam_id).size() > 200 ? t_hist.at(cam_id).pop_front() : void(); // remove if we have too many
     t_hist.at(cam_id).push_back(camdata.timestamp);
   }
 
@@ -143,7 +143,7 @@ void UpdaterCamera::feed_measurement(const CamSimData &camdata) {
 
   // record timestamps
   for (auto cam_id : camdata.ids) {
-    t_hist.at(cam_id).size() > 100 ? t_hist.at(cam_id).pop_front() : void(); // remove if we have too many
+    t_hist.at(cam_id).size() > 200 ? t_hist.at(cam_id).pop_front() : void(); // remove if we have too many
     t_hist.at(cam_id).push_back(camdata.time);
   }
 

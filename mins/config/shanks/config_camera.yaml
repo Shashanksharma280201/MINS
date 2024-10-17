@@ -1,76 +1,76 @@
 %YAML:1.0 # need to specify the file type at the top!
 
 cam:
-  enabled: true
-  max_n: 2
-  use_stereo: true
-  stereo_pair: [0, 1]
-  do_calib_ext: false
-  do_calib_int: true
-  do_calib_dt: false
-  n_pts: 1500
-  fast: 30
-  grid_x: 5
-  grid_y: 5
-  min_px_dist: 5
-  knn: 0.75
-  downsample: true
-  histogram_method: "HISTOGRAM" # NONE, HISTOGRAM, CLAHE
-  max_slam: 0
-  max_msckf: 50
-  feat_rep: "GLOBAL_FULL_INVERSE_DEPTH"
-  init_cov_dt: 1e-4
-  init_cov_ex_o: 1e-4
-  init_cov_ex_p: 1e-4
-  init_cov_in_k: 1e-2
-  init_cov_in_c: 1e-1
-  init_cov_in_r: 1e-6
-  sigma_px: 2
-  chi2_mult: 1
+  enabled: true # Whether the camera is enabled
+  max_n: 2 # Maximum number of cameras
+  use_stereo: true # Use stereo mode (two cameras)
+  stereo_pair: [0, 1] # Pair of stereo cameras (0 = left, 1 = right)
+  do_calib_ext: false # Perform external calibration
+  do_calib_int: false # Perform internal calibration
+  do_calib_dt: false # Perform distortion calibration
+  n_pts: 1200 # Number of points for feature extraction
+  fast: 50 # FAST feature extraction threshold
+  grid_x: 5 # Grid size in x-direction for feature extraction
+  grid_y: 5 # Grid size in y-direction for feature extraction
+  min_px_dist: 5 # Minimum pixel distance between features
+  knn: 0.85 # Ratio for KNN feature matching
+  downsample: true # Downsample the image for processing
+  histogram_method: "HISTOGRAM" # NONE, HISTOGRAM, or CLAHE for histogram equalization
+  max_slam: 0  # Set to 0 for VIO; increase for SLAM features
+  max_msckf: 75  # Maximum number of features for MSCKF; increase to improve accuracy
+  feat_rep: "GLOBAL_FULL_INVERSE_DEPTH" # Feature representation method
+  init_cov_dt: 1e-8  # Initial covariance for timing
+  init_cov_ex_o: 1e-8  # Initial covariance for orientation
+  init_cov_ex_p: 1e-8  # Initial covariance for position
+  init_cov_in_k: 1e-2  # Initial covariance for camera intrinsics
+  init_cov_in_c: 1e-2  # Initial covariance for intrinsic calibration parameters
+  init_cov_in_r: 1e-8  # Initial covariance for rotation
+  sigma_px: 8.0  # Pixel noise standard deviation
+  chi2_mult: 1  # Chi-squared multiplier for outlier rejection
 
   # feature related
-  fi_min_dist: 0.25
-  fi_max_dist: 150
-  fi_max_baseline: 2000
-  fi_max_cond_number: 10000
+  fi_min_dist: 0.1  # Minimum feature distance in 3D space
+  fi_max_dist: 1000  # Maximum feature distance in 3D space
+  fi_max_baseline: 4500  # Maximum triangulation baseline
+  fi_max_cond_number: 1000  # Maximum condition number for triangulation stability
 
-  # ==================================================================
-  # ==================================================================
+# ==================================================================
+# ==================================================================
 
 cam0:
-  timeoffset: 0.0
+  timeoffset: 0.0007707862048737908 # Time offset between camera and IMU
   T_imu_cam:
-    - [-0.007761805563794688, -0.9998617724361787, 0.014703414405289425, 0.058313580358164245]
-    - [0.99994829052482, -0.007664185230985332, 0.0066840512592031154, 0.010828818671678841]
-    - [-0.006570437647551022, 0.014754534405699541, 0.999869558024241, -0.03876433006930458]
+    - [-0.004319018701418653, -0.9999885992544466, -0.0020365261075575075, 0.04851846641062367]
+    - [0.9999904276147462, -0.004320435379673804, 0.0006917492372857481, 0.011126438772353857]
+    - [-0.0007005400302754278, -0.002033518935252497, 0.9999976870195282, -0.004624435602354069]
     - [0.0, 0.0, 0.0, 1.0]
-  cam_overlaps: [1]
-  camera_model: pinhole
-  distortion_coeffs: [0.05232113593699716, -0.12487610292253656, -0.0037217013110222687, -0.005694290501133073]
-  distortion_model: radtan
-  intrinsics: [806.0983330751723, 806.9371188046457, 644.0717375173197, 372.1150158131226]
-  resolution: [1280, 720]
-  timeshift_cam_imu: 0.012250562026137328
-  topic: "/left/image_rect"
+  cam_overlaps: [1] # Camera overlap index for stereo pair
+  camera_model: pinhole # Camera projection model
+  distortion_coeffs: [0.07853232421184868, -0.2383005028752239, -2.0274532956397855e-05, -0.003831091047639914] # Camera distortion coefficients
+  distortion_model: radtan # Radial-tangential distortion model
+  intrinsics: [401.7088739530004, 402.54400294860443, 326.1245022519752, 209.0095353371475] # Camera intrinsics (focal length and principal point)
+  resolution: [640, 400] # Camera resolution
+  timeshift_cam_imu: 0.0007707862048737908 # Time shift between camera and IMU data
+  topic: "/left/image_rect" # ROS topic for camera feed
   
 # Camera 1 configuration
 cam1:
-  timeoffset: 0.0
+  timeoffset: 0.0007722916845643477 # Time offset between camera and IMU
   T_imu_cam:
-    - [-0.0074757030811907765, -0.9998459022778627, 0.015883499665008856, -0.01694883585889153]
-    - [0.9999426404990135, -0.00735270612853528, 0.007788030845354505, 0.010720257947184378]
-    - [-0.007670044022211801, 0.015940809601581174, 0.9998435182637049, -0.03798220632736266]
+    - [-0.00437776749648483, -0.9999798283988005, -0.004601950374794038, -0.02719795162952729]
+    - [0.9999903701524201, -0.004376304324740177, -0.00032796780790397394, 0.010906812321875035]
+    - [0.00030782165694069564, -0.004603341825522695, 0.9999893571882976, -0.00327106466605724]
     - [0.0, 0.0, 0.0, 1.0]
   T_cn_cnm1:
-    - [0.9999992626461442, 0.0002938538069278563, 0.0011782856653407272, -0.07521987985445643]
-    - [-0.0002951599237007626, 0.9999993420889602, 0.0011084684331490013, -4.83727319518795e-05]
-    - [-0.001177959162464639, -0.001108815398522607, 0.9999986914694563, 0.0008627711948019802]
+    - [0.9999967075349849, -6.05607568951949e-05, -0.0025653950132786462, -0.07572744797327788]
+    - [5.7945236684360325e-05, 0.9999994785278975, -0.0010196010357917595, -0.00022714714170129767]
+    - [0.0025654554233071874, 0.0010194490263697917, 0.999996189573812, 0.0012175385152692077]
     - [0.0, 0.0, 0.0, 1.0]
-  cam_overlaps: [0]
-  camera_model: pinhole
-  distortion_coeffs: [0.06051458644906313, -0.1573827673651607, -0.0042069861440766415, -0.004175998024057702]
-  distortion_model: radtan
-  intrinsics: [805.9461502073949, 807.3027995524748, 642.7647267239337, 370.57625497718556]
-  resolution: [1280, 720]
-  timeshift_cam_imu: 0.012243445455696016
-  topic: "/right/image_rect"
+  cam_overlaps: [0] # Camera overlap index for stereo pair
+  camera_model: pinhole # Camera projection model
+  distortion_coeffs: [0.044399374901664894, -0.1334857797923197, 0.0004946277893669252, -0.0015040646940783157] # Camera distortion coefficients
+  distortion_model: radtan # Radial-tangential distortion model
+  intrinsics: [402.88360948189626, 404.0200058306483, 327.1305146877066, 209.13644284802857] # Camera intrinsics (focal length and principal point)
+  resolution: [640, 400] # Camera resolution
+  timeshift_cam_imu: 0.0007722916845643477 # Time shift between camera and IMU data
+  topic: "/right/image_rect" # ROS topic for camera feed
