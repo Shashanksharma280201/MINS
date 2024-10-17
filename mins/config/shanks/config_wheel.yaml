@@ -16,12 +16,12 @@ wheel:
   init_cov_in_r: 1e-4         # Similar to init_cov_in_b, can also be set to 1e-4
   chi2_mult: 1                # Keep as 1 unless you have a specific reason to adjust it
   timeoffset: 0.0             # Set based on calibration data
-  intrinsics: [-0.3, -0.4, 0.0] # Typically set to zero; adjust based on calibration results
+  intrinsics: [0.3, 0.4, 0.0] # Typically set to zero; adjust based on calibration results
   reuse_of_information: true    # Useful for leveraging past measurements
   T_imu_wheel:
-    - [1.0, 0.0, 0.0, -0.3]    # Adjust if you have specific measurements for the transformation
-    - [0.0, 1.0, 0.0, -0.4]
-    - [0.0, 0.0, 1.0, 0.0]
-    - [0.0, 0.0, 0.0, 1.0]
+    - [0.0, 0.0, 1.0, 0.11]   # Rotation and translation for X axis
+    - [0.0, 1.0, 0.0, 0.0]    # Rotation and translation for Y axis
+    - [-1.0, 0.0, 0.0, 0.265] # Rotation and translation for Z axis
+    - [0.0, 0.0, 0.0, 1.0]    # Homogeneous coordinates (no change)
   topic: "/joints/states"
 
