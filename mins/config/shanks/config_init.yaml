@@ -4,8 +4,8 @@ init:
   window_time: 1.0
   imu_thresh: 0.5
   imu_wheel_thresh: 0.6
-  imu_only_init: true
-  imu_gravity_aligned: true
+  imu_only_init: false
+  imu_gravity_aligned: false
   use_gt: false
   use_gt_gnss: false
   use_gt_lidar: false

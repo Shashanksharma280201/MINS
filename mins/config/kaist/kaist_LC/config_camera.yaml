@@ -20,8 +20,8 @@ cam:
   max_msckf: 50
   feat_rep: "GLOBAL_FULL_INVERSE_DEPTH"
   init_cov_dt: 1e-4
-  init_cov_ex_o: 1e-4
-  init_cov_ex_p: 1e-4
+  init_cov_ex_o: 1e-8
+  init_cov_ex_p: 1e-8
   init_cov_in_k: 1e-2
   init_cov_in_c: 1e-1
   init_cov_in_r: 1e-6
