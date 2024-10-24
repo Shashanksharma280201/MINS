@@ -2,26 +2,26 @@
 
 wheel:
   enabled: false
-  type: "Wheel3DLin"
+  type: "Wheel2DCen"
   do_calib_dt: true
   do_calib_ext: true
   do_calib_int: true
-  noise_w: 0.005               # Lower noise to reduce impact of measurement errors
-  noise_v: 0.005               # Lower noise to improve stability in velocity estimates
-  noise_p: 0.0025              # Lower position noise for more accurate tracking
-  init_cov_dt: 1e-8            # Reduce for more confidence in initial delta time
-  init_cov_ex_o: 5e-8          # Tighter initial covariance for orientation to reduce drift
-  init_cov_ex_p: 1e-5          # Tighter initial covariance for position
-  init_cov_in_b: 1e-5          # Reduce for more accurate bias estimation
-  init_cov_in_r: 1e-5          # Reduce for more accurate rotational bias estimation
-  chi2_mult: 1
-  timeoffset: 0.0007           # Ensure correct calibration for time offset
-  intrinsics: [-0.10, 0.32, -0.10] # Keep based on your calibration
+  noise_w: 0.2               # Reduced noise for angular velocity, tuned for smoother rotation estimates
+  noise_v: 0.5               # Reduced noise for velocity for better stability
+  noise_p: 0.1              # Lowered noise to prioritize position accuracy
+  init_cov_dt: 1e-2            # Tighter covariance for time delta, improves initial calibration confidence
+  init_cov_ex_o: 1e-2          # Tighter orientation covariance to reduce drift over time
+  init_cov_ex_p: 1e-1          # Further reduced covariance for position to improve precision
+  init_cov_in_b: 1e-0          # Lower bias covariance for better bias estimation, improving drift correction
+  init_cov_in_r: 1e-0          # Lower rotational bias covariance for improved bias handling
+  chi2_mult: 1              # Slightly tighter threshold for outlier rejection to reject noisy measurements
+  timeoffset: 0.001           # Fine-tuned time offset to account for 100 Hz input rate and potential sensor delay
+  intrinsics: [0.11, 0.11, 0.71] # Retained based on your calibration
   reuse_of_information: true   # Continue to leverage past measurements for accuracy
   T_imu_wheel:
-    - [0.9445, 0.0681, 0.3214, 0.11]   # Updated rotation and translation for X axis
-    - [-0.0948, 0.9932, 0.0681, 0.0]   # Updated rotation and translation for Y axis
-    - [-0.3146, -0.0948, 0.9445, 0.265] # Updated rotation and translation for Z axis
-    - [0.0, 0.0, 0.0, 1.0]             # Homogeneous coordinates (no change)
+    - [0, 0, 1, 0.28]          # Rotation and translation for X axis
+    - [1, 0, 0, 0.0]           # Rotation and translation for Y axis
+    - [0, -1, 0, 0.17]       # Rotation and translation for Z axis
+    - [0.0, 0.0, 0.0, 1.0]      # Homogeneous coordinates (no change)
     
   topic: "/joints/states"

@@ -1,23 +1,23 @@
 %YAML:1.0 # need to specify the file type at the top!
 
 cam:
-  enabled: false
+  enabled: true
   max_n: 2
   use_stereo: true
   stereo_pair: [0, 1]
   do_calib_ext: false
   do_calib_int: true
   do_calib_dt: false
-  n_pts: 1000
+  n_pts: 1500
   fast: 30
   grid_x: 15
   grid_y: 15
   min_px_dist: 15
   knn: 0.65
-  downsample: true
+  downsample: false
   histogram_method: "HISTOGRAM" # NONE, HISTOGRAM, CLAHE
-  max_slam: 50
-  max_msckf: 10
+  max_slam: 0
+  max_msckf: 70
   feat_rep: "GLOBAL_FULL_INVERSE_DEPTH"
   init_cov_dt: 1e-4
   init_cov_ex_o: 1e-4
@@ -25,7 +25,7 @@ cam:
   init_cov_in_k: 1e-2
   init_cov_in_c: 1e-1
   init_cov_in_r: 1e-6
-  sigma_px: 2
+  sigma_px: 1.5
   chi2_mult: 1
 
   # feature related

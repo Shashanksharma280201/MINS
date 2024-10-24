@@ -8,4 +8,3 @@ imu:
   gyro_noise: 0.00135568192
   gyro_bias: 7.111367e-05
   topic: "/imu"
-  # rate: 200

@@ -2,11 +2,11 @@
 
 init:
   window_time: 1.0
-  imu_thresh: 0.2
+  imu_thresh: 0.5
   imu_wheel_thresh: 0.5  # Slightly reduced for better responsiveness
   imu_only_init: true
   imu_gravity_aligned: true  # Enable for better gravity alignment
   use_gt: false
   use_gt_gnss: false
   use_gt_lidar: false
-  cov_size: 1e-4  # Reduced covariance size for better initialization accuracy
+  cov_size: 1e-1  # Reduced covariance size for better initialization accuracy

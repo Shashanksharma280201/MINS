@@ -129,7 +129,7 @@ ov_core::ImuData ROS2Helper::Imu2Data(const sensor_msgs::msg::Imu::SharedPtr msg
   ov_core::ImuData message;
   message.timestamp = rclcpp::Time(msg->header.stamp).seconds();
   message.wm << msg->angular_velocity.x, msg->angular_velocity.y, msg->angular_velocity.z;
-  message.am << msg->linear_acceleration.x, msg->linear_acceleration.y, msg->linear_acceleration.z;
+  message.am << msg->linear_acceleration.z, msg->linear_acceleration.y, msg->linear_acceleration.x;
   return message;
 }
 

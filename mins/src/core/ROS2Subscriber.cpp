@@ -141,6 +141,7 @@ void ROS2Subscriber::callback_inertial(const Imu::SharedPtr msg) {
   pub->publish_imu();
   PRINT1(YELLOW "[SUB] IMU measurement: %.3f" RESET, imu.timestamp);
   PRINT1(YELLOW "|%.3f,%.3f,%.3f|%.3f,%.3f,%.3f\n" RESET, imu.wm(0), imu.wm(1), imu.wm(2), imu.am(0), imu.am(1), imu.am(2));
+  // PRINT2("subscribing to imu:");
 }
 
 void ROS2Subscriber::callback_monocular_I(const Image::ConstSharedPtr msg, int cam_id) {
@@ -199,6 +200,7 @@ void ROS2Subscriber::callback_wheel(const JointState::SharedPtr msg) {
   WheelData data = ROS2Helper::JointState2Data(msg);
   sys->feed_measurement_wheel(data);
   PRINT1(YELLOW "[SUB] Wheel measurement: %.3f|%.3f,%.3f\n" RESET, data.time, data.m1, data.m2);
+  // PRINT2("subscribing to wheel:");
 }
 
 void ROS2Subscriber::callback_gnss(const NavSatFix::SharedPtr msg, int gps_id) {
