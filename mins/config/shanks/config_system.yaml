@@ -3,11 +3,11 @@
 sys:
   verbosity: 2
   save_timing: true
-  path_timing: "MINS_DIR/../../../../outputs/tmp/0.time"
+  path_timing: "/home/flo/Videos/mins/outputs/tmp/0.time"
   save_state: false
-  path_state: "MINS_DIR/../../../../outputs/tmp/0/"
+  path_state: "/home/flo/Videos/mins/outputs/tmp/0/"
   save_trajectory: true
-  path_trajectory: "MINS_DIR/../../../../outputs/tmp/0.txt"
+  path_trajectory: "/home/flo/Videos/mins/outputs/tmp/0.txt"
   save_prints: false
   exp_id: 0
 
